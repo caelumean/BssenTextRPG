@@ -1,0 +1,106 @@
+﻿using TextRPG.Utils;
+using TextRPG.Models;
+
+namespace TextRPG.Data
+{
+   
+    class GameManager
+    {
+        // 싱글톤 패턴(Singleton Pattern) 구현
+        // 시작과 종료될 때까지 항상 하나만 존재하도록 하기 위한 패턴이다.
+        // 다른 클래스에서 손쉽게 접근할 수 있도록 용도이다.
+
+        // region으로 구분 가능
+        #region 싱글톤 패턴
+        //싱글톤 인스턴스(내부 접슨 용 변수: 필드)
+        private static GameManager instance;
+
+        // 외부에서 인스턴스에 접근할 수 있는 정적 속성(프로퍼티)
+        public static GameManager Instance
+        {
+            get
+            {
+                // 인스턴스가 없으면 새로 생성
+                if( instance == null)
+                {
+                    instance = new GameManager();
+                }
+
+                return instance;
+            }
+        }
+
+        private GameManager()
+        {
+            // 클래스가 생성될 때 초기화 작업 수행
+        }
+
+        #endregion
+
+        #region 게임 시작/종료
+        public void StartGame()
+        {
+            // TODO : 타이틀 표시
+            ConsoleUI.ShowTitle();
+            Console.WriteLine("빡센 게임에 오신 것을 환영합니다\n");
+
+            // TODO : 캐릭터 생성
+            CreateCharacter();
+            // TODO : 인벤토리 초기화
+            // TODO : 초기 아이템 지급
+        }
+        #endregion
+
+        #region 캐릭터 생성
+        private void CreateCharacter()
+        {
+            Console.WriteLine("캐릭터의 이름을 입력하세요: ");
+            // 콘솔에서 입력할 수 있는 메소드
+            string? name = Console.ReadLine(); // nullable 허용
+
+            // null , 빈칸, space 다 확인해주는 것
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                // 기본 이름 설정
+                name = "무명용사";
+            }
+            Console.WriteLine($"{name}님, 모험을 시작하겠습니다!");
+
+            // 0:전사, 1:마법사, 2:궁수 - 열거형 변수를 선언
+            // 직업 선택
+            Console.WriteLine("직업을 선택하세요: ");
+            Console.WriteLine("1: 전사");
+            Console.WriteLine("2: 궁수");
+            Console.WriteLine("3: 마법사");
+
+            JobType job = JobType.Warrior;
+
+            while(true)
+            {
+                Console.WriteLine("선택 (1-3): ");
+                string? input = Console.ReadLine();
+
+                switch(input)
+                {
+                    case "1":
+                        job = JobType.Warrior;
+                        break;
+                    case "2":
+                        job = JobType.Archer;
+                        break;
+                    case "3":
+                        job = JobType.Wizard;
+                        break;
+                    default:
+                        Console.WriteLine("잘못된 입력입니다. 다시 선택해주세요.");
+                        continue;
+                }
+                break;
+            }
+        }
+
+
+
+        #endregion
+    }
+}
