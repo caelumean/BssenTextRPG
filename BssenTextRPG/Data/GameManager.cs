@@ -123,13 +123,16 @@ namespace TextRPG.Data
             Player = new Player(name, job);
             Console.WriteLine($"\n{name}님, {job}직업으로 캐릭터가 생성되었습니다.");
 
+            // 적 캐틱터 생성
+            Enemy enemy = Enemy.CreateEnemy(Player.Level);
+            enemy.DisplayInfo();
             // 테스트 코드
             //Console.WriteLine($"Player HP:{Player.CurrentHp}");
             //Console.WriteLine($"Player MP:{Player.CurrentMp}");
             //Console.WriteLine($"Player ATK:{Player.AttackPower}");
             //Console.WriteLine($"Player DEF:{Player.Defense}");
             
-            //Player.DisplayInfo();
+            //Player.DisplayInfo();            
             ConsoleUI.PressAnyKey();
         }
         #endregion
