@@ -58,7 +58,9 @@ namespace TextRPG.Data
         #region 캐릭터 생성
         private void CreateCharacter()
         {
-            Console.WriteLine("캐릭터의 이름을 입력하세요: ");
+            // WriteLine : 출력하고 자동으로 엔터
+            // Write : 그냥 출력
+            Console.Write("캐릭터의 이름을 입력하세요: ");
             // 콘솔에서 입력할 수 있는 메소드
             string? name = Console.ReadLine(); // nullable 허용
 
@@ -106,10 +108,11 @@ namespace TextRPG.Data
             Console.WriteLine($"\n{name}님, {job}직업으로 캐릭터가 생성되었습니다.");
 
             // 테스트 코드
-            Console.WriteLine($"Player HP:{Player.CurrentHp}");
-            Console.WriteLine($"Player MP:{Player.CurrentMp}");
-            Console.WriteLine($"Player ATK:{Player.AttackPower}");
-            Console.WriteLine($"Player DEF:{Player.Defense}");
+            //Console.WriteLine($"Player HP:{Player.CurrentHp}");
+            //Console.WriteLine($"Player MP:{Player.CurrentMp}");
+            //Console.WriteLine($"Player ATK:{Player.AttackPower}");
+            //Console.WriteLine($"Player DEF:{Player.Defense}");
+            Player.DisplayInfo();
         }
        
 
