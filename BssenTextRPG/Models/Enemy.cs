@@ -43,7 +43,7 @@ namespace TextRPG.Models
             int maxMp = 20 + (enemyLevel - 1) * 10;
             int attackPower = 10 + (enemyLevel - 1) * 5;
             int defense = 5 + (enemyLevel - 1) * 3;
-            int goldReward = 20 + (enemyLevel - 10) * 10;
+            int goldReward = 20 + (enemyLevel - 1) * 10;
 
             return new Enemy($"Lv{enemyLevel} {enemyName}", maxHp, maxMp, attackPower, defense, enemyLevel ,goldReward);
         }

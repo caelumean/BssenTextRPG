@@ -86,7 +86,6 @@ namespace TextRPG.Models
             base.DisplayInfo();
             Console.WriteLine($"골드: {Gold}");
         }
-        #endregion
 
         // 기본 공격 메소드(override)
         public override int Attack(Character target)
@@ -111,6 +110,16 @@ namespace TextRPG.Models
             // 데미지 전달
             return target.TakeDamage(totalDamage);
         }
+
+        // 골드 획득 메서드
+        public void GainGold(int amount)
+        {
+            Gold += amount;
+            Console.WriteLine($"골드 +{amount} 획득! 현재 골드: {Gold}");
+        }
+
+
+        #endregion
     }
 
 }
