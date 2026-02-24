@@ -1,9 +1,6 @@
-﻿
-using System.ComponentModel;
-
-namespace TextRPG.Models
+﻿namespace TextRPG.Models
 {
-    internal class Player : Character
+    public class Player : Character
     {
    
         #region 프로퍼티

@@ -1,5 +1,4 @@
-﻿
-namespace TextRPG.Models
+﻿namespace TextRPG.Models
 {
     public class Enemy : Character
     {

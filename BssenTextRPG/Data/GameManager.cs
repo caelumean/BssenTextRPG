@@ -1,5 +1,6 @@
 ﻿using TextRPG.Utils;
 using TextRPG.Models;
+using TextRPG.Systems;
 
 namespace TextRPG.Data
 {
@@ -132,7 +133,11 @@ namespace TextRPG.Data
             //Console.WriteLine($"Player ATK:{Player.AttackPower}");
             //Console.WriteLine($"Player DEF:{Player.Defense}");
             
-            //Player.DisplayInfo();            
+            //Player.DisplayInfo();
+
+            //전투 테스트
+            BattleSystem  battleSystem = new BattleSystem();
+            bool playerWin = battleSystem.StartBattle(Player, enemy);
             ConsoleUI.PressAnyKey();
         }
         #endregion
