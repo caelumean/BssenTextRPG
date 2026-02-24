@@ -56,6 +56,9 @@ namespace TextRPG.Systems
                 {
                     case "1":
                         // 일반 공격
+                        int damage = player.Attack(enemy);
+                        Console.WriteLine($"{player.Name}의 공격! {enemy.Name}에게 {damage}의 피해를 입혔습니다.");
+                        Console.WriteLine($"{enemy.Name}의 남은 HP: {enemy.CurrentHp}/{enemy.MaxHp}");
                         break;
                     case "2":
                         break; 
