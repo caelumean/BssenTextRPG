@@ -31,6 +31,8 @@ namespace TextRPG.Systems
                 {
                     // 플레이어 도망
                     Console.WriteLine("\n전투에서 도망쳤습니다...");
+                    // return false 는 반복문을 빠져나가 해당 메소드를 빠져나간다.
+                    // return true는 반복문을 계속 유지하게 만든다.
                     return false; //전투 패배
                 }
                 // TODO: 적 사망여부 판단
