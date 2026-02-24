@@ -1,4 +1,5 @@
-﻿using TextRPG.Models;
+﻿using System;
+using TextRPG.Models;
 
 namespace TextRPG.Systems
 {
@@ -35,7 +36,7 @@ namespace TextRPG.Systems
             // 전투 결과 반환
             return player.IsAlive;
         }
-        #endregion
+        #endregion`
 
         #region 플레이어 턴
         // 플레이어 턴 (1. 공격, 2. 스킬, 3. 도망)
@@ -52,7 +53,7 @@ namespace TextRPG.Systems
                 Console.Write("\n선택 (1-3): ");
                 string? input = Console.ReadLine();
 
-                switch(input)
+                switch (input)
                 {
                     case "1":
                         // 일반 공격
@@ -61,7 +62,20 @@ namespace TextRPG.Systems
                         Console.WriteLine($"{enemy.Name}의 남은 HP: {enemy.CurrentHp}/{enemy.MaxHp}");
                         break;
                     case "2":
-                        break; 
+                        // 스킬 사용 전에 MP 체크
+                        if (player.CurrentMp < 15)
+                        {
+                            Console.WriteLine("MP가 부족합니다.");
+                            continue;
+                        }
+
+                        // 스킬 발동
+                        int skillDamage = player.SkillAttack(enemy);
+
+                        Console.WriteLine($"{player.Name}의 스킬 공격! {enemy.Name}에게 {skillDamage}의 피해를 입혔습니다.");
+                        Console.WriteLine($"{enemy.Name}의 남은 HP: {enemy.CurrentHp}/{enemy.MaxHp}");
+                        break;
+  
                      case "3":
                         break;
                     default:
