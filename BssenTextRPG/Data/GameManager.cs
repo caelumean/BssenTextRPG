@@ -35,12 +35,19 @@ namespace TextRPG.Data
         private GameManager()
         {
             // 클래스가 생성될 때 초기화 작업 수행
+
+            // 전투 시스템 초기화
+            BattleSystem = new BattleSystem();
         }
 
         #endregion
 
         #region 프로퍼티
+        // 플레이어 캐릭터
         public Player? Player { get; private set; }
+
+        // 전투 시스템
+        public BattleSystem BattleSystem { get; private set; }
 
         // 게임 실행 여부
         // 뒤에 true는 초기값
@@ -126,8 +133,8 @@ namespace TextRPG.Data
             Console.WriteLine($"\n{name}님, {job}직업으로 캐릭터가 생성되었습니다.");
 
             // 적 캐틱터 생성
-            Enemy enemy = Enemy.CreateEnemy(Player.Level);
-            enemy.DisplayInfo();
+            //Enemy enemy = Enemy.CreateEnemy(Player.Level);
+            //enemy.DisplayInfo();
             // 테스트 코드
             //Console.WriteLine($"Player HP:{Player.CurrentHp}");
             //Console.WriteLine($"Player MP:{Player.CurrentMp}");
@@ -137,8 +144,10 @@ namespace TextRPG.Data
             //Player.DisplayInfo();
 
             //전투 테스트
-            BattleSystem  battleSystem = new BattleSystem();
-            bool playerWin = battleSystem.StartBattle(Player, enemy);
+            //BattleSystem  battleSystem = new BattleSystem();
+            //bool playerWin = battleSystem.StartBattle(Player, enemy);
+
+
             ConsoleUI.PressAnyKey();
         }
         #endregion
@@ -176,6 +185,7 @@ namespace TextRPG.Data
                     break;
                 case "4":
                     // TODO: 던전입장 및 전투 기능 구현
+                    EnterDungeon();
                     break;
                 case "5":
                     // TODO: 휴식 기능 구현
@@ -193,6 +203,25 @@ namespace TextRPG.Data
                     break;
 
             }
+        }
+        #endregion
+
+        #region 메뉴 기능
+        // 던전 입장
+        public void EnterDungeon()
+        {
+            Console.Clear();
+            Console.WriteLine("\n던전에 입장합니다...");
+
+            // 적 캐릭터 생성
+            Enemy enemy = Enemy.CreateEnemy(Player.Level);
+            ConsoleUI.PressAnyKey();
+
+            // 전투 시작
+            BattleSystem.StartBattle(Player, enemy);
+
+            Console.WriteLine("\n던전 탐험을 마치고 마을로 돌아갑니다...");
+            ConsoleUI.PressAnyKey();
         }
         #endregion
     }

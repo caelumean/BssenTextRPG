@@ -88,6 +88,7 @@ namespace TextRPG.Systems
                         Console.WriteLine($"{player.Name}의 공격! {enemy.Name}에게 {damage}의 피해를 입혔습니다.");
                         Console.WriteLine($"{enemy.Name}의 남은 HP: {enemy.CurrentHp}/{enemy.MaxHp}");
                         return true;
+
                     case "2":
                         // 스킬 사용 전에 MP 체크
                         if (player.CurrentMp < 15)
@@ -104,7 +105,20 @@ namespace TextRPG.Systems
                         return true;
   
                      case "3":
-                        return false;
+                        // 도망 시도 : (성공확률 50%)
+                        Random random = new Random();
+                        if (random.NextDouble() < 0.5)
+                        {
+                            Console.WriteLine("\n도망에 성공했습니다!");
+                            // 도망성공 전투 종료
+                            return false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\n도망에 실패했습니다.");
+                            // 도망 실패 다음 턴 진행
+                            return true;
+                        }
                     default:
                         Console.WriteLine("잘못된 입력입니다. 다시 선택해주세요.");
                         break;
