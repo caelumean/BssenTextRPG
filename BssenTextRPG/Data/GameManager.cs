@@ -167,13 +167,26 @@ namespace TextRPG.Data
         private void SetupInitItems()
         {
             // 기본 장비
-            Inventory.AddItem(Equipment.CreateWeapon("목검"));
-            Inventory.AddItem(Equipment.CreateArmor("천갑옷"));
+            //Inventory.AddItem(Equipment.CreateWeapon("목검"));
+            //Inventory.AddItem(Equipment.CreateArmor("천갑옷"));
+            // var 키워드 : 컴파일하는 시점에서 뒤에 오는
+            // 변수의 타입을 자동적으로 캐치해서 변경해주는 키워드이다.
+            // 타입이 굉장히 긴 경우에는 var키워드가 아주 적절하게 사용할 수 있기 때문에
+            // 적극적으로 사용하는 걸 추천한다.
+            // 어떤 값이 대입되는 지 명확히 알 수 있는 경우에서 사용하길 권함
+            var weapon = Equipment.CreateWeapon("목검");
+            var armor = Equipment.CreateArmor("천갑옷");
+            Inventory.AddItem(weapon);
+            Inventory.AddItem(armor);
 
             // 포션 지급
             Inventory.AddItem(Consumable.CreatePotion("체력포션"));
             Inventory.AddItem(Consumable.CreatePotion("체력포션"));
             Inventory.AddItem(Consumable.CreatePotion("마나포션"));
+
+            // 기본 장비 착용
+            Player.EquipItem(weapon);
+            Player.EquipItem(armor);
 
             Console.WriteLine("\n초기 장비가 지급되었습니다.");
             ConsoleUI.PressAnyKey();
