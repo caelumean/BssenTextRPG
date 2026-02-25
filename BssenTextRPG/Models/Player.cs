@@ -8,11 +8,11 @@ namespace TextRPG.Models
         #region 프로퍼티
         // 직업
         public JobType Job { get; private set; }
-        //골드
+        // 골드
         public int Gold { get; private set; }
-        // TODO: 장착 무기
+        // 장착 무기
         public Equipment? EquipedWeapon { get; private set; }
-        // TODO: 장착 방어구
+        // 장착 방어구
         public Equipment? EquipedArmor { get; private set; }
         #endregion
 

@@ -2,7 +2,7 @@
 
 namespace TextRPG.Models
 {
-    internal class Consumable : Item
+    public class Consumable : Item
     {
         #region 프로퍼티 
         // HP 회복량

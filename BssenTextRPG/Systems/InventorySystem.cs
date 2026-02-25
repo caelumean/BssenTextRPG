@@ -6,7 +6,7 @@ using TextRPG.Utils;
 
 namespace TextRPG.Systems
 {
-    internal class InventorySystem
+    public class InventorySystem
     {
         #region 프로퍼티
         // 아이템 목록
