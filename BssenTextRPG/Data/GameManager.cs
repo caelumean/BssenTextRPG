@@ -237,7 +237,8 @@ namespace TextRPG.Data
                     EnterDungeon();
                     break;
                 case "5":
-                    // TODO: 휴식 기능 구현
+                    // 휴식 기능 구현
+                    Rest();
                     break;
                 case "6":
                     //TODO: 저장기능 구현
@@ -271,6 +272,34 @@ namespace TextRPG.Data
 
             Console.WriteLine("\n던전 탐험을 마치고 마을로 돌아갑니다...");
             ConsoleUI.PressAnyKey();
+        }
+
+        // 휴식 (HP/MP 회복)
+        public void Rest()
+        {
+            // 상수(Constant)
+            const int restCost = 50;
+
+            Console.Clear();
+            Console.WriteLine("\n여관에서 휴식을 취합니다...");
+            Console.WriteLine($"\n비용: {restCost} 골드");
+
+            if(Player.Gold < restCost)
+            {
+                Console.WriteLine("\n골드가 부족합니다.");
+                ConsoleUI.PressAnyKey();
+                return;
+            }
+            Console.Write("\n휴식을 취하겠습니까? (y/n): ");
+
+            if(Console.ReadLine()?.ToLower() == "y")
+            {
+                Player.SpendGold(restCost);
+                Player.HealHp(Player.MaxHp);
+                Player.HealMp(Player.MaxMp);
+                Console.WriteLine("\n휴식을 취했습니다. HP와 MP모두 회복되었습니다.");
+                ConsoleUI.PressAnyKey();
+            }
         }
         #endregion
     }
