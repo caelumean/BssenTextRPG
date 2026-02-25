@@ -2,6 +2,7 @@
 // List 쓸려면 필요
 using System.Collections.Generic;
 using TextRPG.Models;
+using TextRPG.Utils;
 
 namespace TextRPG.Systems
 {
@@ -95,6 +96,7 @@ namespace TextRPG.Systems
                         break;
                     case "2":
                         //아이템 버리기로직
+                        DropItem();
                         break;
                     case "0":
                         return;
@@ -120,8 +122,7 @@ namespace TextRPG.Systems
             // 콘솔에서 값을 입력할 때까지 대기
             // 그리고 int타입으로 변환시킨다.
             // 성공적으로 받으면 out 키워드에다가 저장한다.
-            if(int.TryParse(Console.ReadLine(), out int index) 
-                && index > 0 && index < Items.Count)
+            if(int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= Items.Count)
             {
                 // 배열은 0번부터 시작한다.
                 // 그래서 입력받은 값에 -1을 해야지 일치한다.
@@ -140,11 +141,44 @@ namespace TextRPG.Systems
             else if(index != 0)
             {
                 Console.WriteLine("잘못된 선택입니다.");
+                ConsoleUI.PressAnyKey();
             }
-
-
         }
         #endregion
+        #region 아이템 버리기
 
+        private void DropItem()
+        {
+            if(Items.Count == 0)
+            {
+                return;
+            }
+
+            Console.WriteLine("\n버릴 아이템 번호 (0:취소)> ");
+
+            // 입력받는 값의 범위를 지정
+            // 입력 받은 값과 index가 0보다 크고 index가 count보다 작아야한다.
+            if(int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= Items.Count)
+            {
+                Item item = Items[index - 1];
+                Console.Write($"정말 {item.Name}을 버리겠습니까? (y/n)");
+
+                // ToLower는 입력받은 글자를 전부다 소문자로 바꿔준다.
+                if(Console.ReadLine()?.ToLower() == "y")
+                {
+                    //Console.WriteLine($"{item.Name}을 버렸습니다.");
+                    RemoveItem(item);
+                    
+                }
+            }
+            else if (index != 0)
+            {
+                Console.WriteLine("잘못된 선택입니다.");
+                ConsoleUI.PressAnyKey();
+            }
+        }
+
+
+        #endregion
     }
 }
