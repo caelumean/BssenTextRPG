@@ -59,12 +59,15 @@ namespace TextRPG.Data
         #region 게임 시작/종료
         public void StartGame()
         {
-            // TODO : 타이틀 표시
+            // 타이틀 표시
             ConsoleUI.ShowTitle();
             Console.WriteLine("빡센 게임에 오신 것을 환영합니다\n");
 
-            // TODO : 캐릭터 생성
+            // 캐릭터 생성
             CreateCharacter();
+
+            // 테스트 코드
+            Player.TakeDamage(100);
 
             // 인벤토리 초기화
             Inventory = new InventorySystem();
@@ -79,7 +82,7 @@ namespace TextRPG.Data
                 ShowMainMenu();
             }
 
-            //게임 종료
+            // 게임 종료
             if(!IsRunning)
             {
                 ConsoleUI.ShowGameOver();
@@ -204,14 +207,14 @@ namespace TextRPG.Data
                     ConsoleUI.PressAnyKey();
                     break;
                 case "2":
-                    // TODO 인벤토리 기능 구현
-                    Inventory.ShowInventoryMenu();
+                    // 인벤토리 기능 구현
+                    Inventory.ShowInventoryMenu(Player);
                     break;
                 case "3":
                     // TODO:상점 기능 구현
                     break;
                 case "4":
-                    // TODO: 던전입장 및 전투 기능 구현
+                    // 던전입장 및 전투 기능 구현
                     EnterDungeon();
                     break;
                 case "5":

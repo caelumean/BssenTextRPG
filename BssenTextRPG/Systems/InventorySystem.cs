@@ -74,7 +74,7 @@ namespace TextRPG.Systems
                 Items[i].DisplayInfo();
             }
         }
-        public void ShowInventoryMenu()
+        public void ShowInventoryMenu(Player? player)
         {
             while(true)
             {
@@ -91,6 +91,7 @@ namespace TextRPG.Systems
                 {
                     case "1":
                         //아이템사용로직
+                        UseItem(player);
                         break;
                     case "2":
                         //아이템 버리기로직
@@ -105,5 +106,45 @@ namespace TextRPG.Systems
             }
         }
         #endregion
+
+        #region 아이템 사용
+        private void UseItem(Player player)
+        {
+            if(Items.Count == 0)
+            {
+                Console.WriteLine("인벤토리가 비어있습니다.");
+                return;
+            }
+
+            Console.Write("\n사용할 아이템 번호(0:취소)> ");
+            // 콘솔에서 값을 입력할 때까지 대기
+            // 그리고 int타입으로 변환시킨다.
+            // 성공적으로 받으면 out 키워드에다가 저장한다.
+            if(int.TryParse(Console.ReadLine(), out int index) 
+                && index > 0 && index < Items.Count)
+            {
+                // 배열은 0번부터 시작한다.
+                // 그래서 입력받은 값에 -1을 해야지 일치한다.
+                Item item = Items[index - 1];
+
+                if(item.Use(player))
+                {
+                    // 소모품일 경우 사용 후 리스트에서 제거하기
+                    // is 키워드 item이 Consumable타입이면
+                    if(item is Consumable)
+                    {
+                        RemoveItem(item);
+                    }
+                }
+            }
+            else if(index != 0)
+            {
+                Console.WriteLine("잘못된 선택입니다.");
+            }
+
+
+        }
+        #endregion
+
     }
 }

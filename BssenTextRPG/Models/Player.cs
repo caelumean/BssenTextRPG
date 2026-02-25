@@ -11,7 +11,9 @@ namespace TextRPG.Models
         //골드
         public int Gold { get; private set; }
         // TODO: 장착 무기
+        public Equipment? EquipedWeapon { get; private set; }
         // TODO: 장착 방어구
+        public Equipment? EquipedArmor { get; private set; }
         #endregion
 
         #region 생성자
@@ -118,6 +120,59 @@ namespace TextRPG.Models
             Console.WriteLine($"골드 +{amount} 획득! 현재 골드: {Gold}");
         }
 
+        // 장비 착용
+        public void EquipItem(Equipment newEquipment)
+        {
+            Equipment? prevEquipment = null;
+
+            switch (newEquipment.Slot)
+            {
+                case EquipmentSlot.Weapon:
+                    // 현재 장착하고 있는 장비를 prevEquipment에다가 저장해주고
+                    prevEquipment = EquipedWeapon;
+                    // EquipedWeapon여기에다가 착용할려는 장비를 저장한다.
+                    EquipedWeapon = newEquipment;
+                    break;
+                case EquipmentSlot.Armor:
+                    prevEquipment = EquipedArmor;
+                    EquipedArmor = newEquipment;
+                    break;
+            }
+
+            // 이전 장비 해제 메시지
+            if (prevEquipment != null)
+            {
+                Console.WriteLine($"{prevEquipment} 장착 해제");
+            }
+            Console.WriteLine($"{newEquipment.Name} 장착 완료");
+        }
+
+        // 장비 해제
+        // 장착해제할 아이템을 받아오기
+        public Equipment? UnequipItem(EquipmentSlot slot)
+        {
+            Equipment? equipment = null;
+
+            switch(slot)
+            {
+                case EquipmentSlot.Weapon:
+                    equipment = EquipedWeapon;
+                    EquipedWeapon = null;
+                    break;
+                case EquipmentSlot.Armor:
+                    equipment = EquipedArmor;
+                    EquipedArmor = null;
+                    break;
+            }
+
+            if (equipment != null)
+            {
+                Console.WriteLine($"{equipment.Name} 장착 해제");
+            }
+
+            return equipment;
+
+        }
 
         #endregion
     }

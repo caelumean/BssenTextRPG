@@ -34,6 +34,7 @@ namespace TextRPG.Models
         public override bool Use(Player player)
         {
             // 장비 착용 로직 구현
+            player.EquipItem(this);
             return true;
         }
 
