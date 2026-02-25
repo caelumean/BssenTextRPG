@@ -59,7 +59,7 @@ namespace TextRPG.Models
         {
             switch (armorType)
             {
-                case "천값옷":
+                case "천갑옷":
                     return new Equipment("천갑옷","기본 방어구",100, EquipmentSlot.Armor, 0, 5);
                 case "철갑옷":
                     return new Equipment("철갑옷","강력한 방어구",500,EquipmentSlot.Armor, 0, 20);

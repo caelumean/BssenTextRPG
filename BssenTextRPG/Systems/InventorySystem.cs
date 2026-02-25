@@ -66,6 +66,13 @@ namespace TextRPG.Systems
                 Console.WriteLine("인벤토리가 비어있습니다.");
                 return;
             }
+
+            Console.WriteLine("\n[보유아이템]");
+            for(int i=0; i< Items.Count; i++)
+            {
+                Console.Write($"[{i + 1}] ");
+                Items[i].DisplayInfo();
+            }
         }
         public void ShowInventoryMenu()
         {

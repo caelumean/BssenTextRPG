@@ -49,7 +49,7 @@ namespace TextRPG.Data
         // 전투 시스템
         public BattleSystem BattleSystem { get; private set; }
 
-        // 인벤토리 시스팀
+        // 인벤토리 시스템
         public InventorySystem Inventory { get; private set; }
         // 게임 실행 여부
         // 뒤에 true는 초기값
@@ -68,6 +68,9 @@ namespace TextRPG.Data
 
             // 인벤토리 초기화
             Inventory = new InventorySystem();
+
+            // 초기 아이템 지급
+            SetupInitItems();
 
             // 메인게임 루프
             IsRunning = true;
@@ -156,9 +159,26 @@ namespace TextRPG.Data
 
             ConsoleUI.PressAnyKey();
         }
-        #endregion
 
-        #region
+        // 초기 아이템 지급
+        private void SetupInitItems()
+        {
+            // 기본 장비
+            Inventory.AddItem(Equipment.CreateWeapon("목검"));
+            Inventory.AddItem(Equipment.CreateArmor("천갑옷"));
+
+            // 포션 지급
+            Inventory.AddItem(Consumable.CreatePotion("체력포션"));
+            Inventory.AddItem(Consumable.CreatePotion("체력포션"));
+            Inventory.AddItem(Consumable.CreatePotion("마나포션"));
+
+            Console.WriteLine("\n초기 장비가 지급되었습니다.");
+            ConsoleUI.PressAnyKey();
+
+
+        }
+        #endregion
+        #region 메인메뉴
         public void ShowMainMenu()
         {
             Console.Clear();

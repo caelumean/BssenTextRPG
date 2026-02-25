@@ -66,6 +66,24 @@ namespace TextRPG.Models
             
         }
 
+        // HP회복 메서드
+        public int HealHp(int amount)
+        {
+            // curHp 50
+            int beforeHp = CurrentHp;
+
+            // 회복 후 현재 HP 최대 HP를 넘지 않도록
+            CurrentHp = Math.Min(MaxHp, CurrentHp + amount);
+
+            return CurrentHp - beforeHp; // 실제로 회복된 양을 반환
+        }
+        // MP회복 메서드
+        public int HealMp(int amount)
+        {
+            int beforeMp = CurrentMp;
+            CurrentMp = Math.Min(MaxMp, CurrentMp + amount);
+            return CurrentMp - beforeMp;
+        }
         #endregion
     }
 }
