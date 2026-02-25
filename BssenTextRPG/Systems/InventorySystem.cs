@@ -96,7 +96,7 @@ namespace TextRPG.Systems
                         break;
                     case "2":
                         //아이템 버리기로직
-                        DropItem();
+                        DropItem(player);
                         break;
                     case "0":
                         return;
@@ -147,7 +147,7 @@ namespace TextRPG.Systems
         #endregion
         #region 아이템 버리기
 
-        private void DropItem()
+        private void DropItem(Player player)
         {
             if(Items.Count == 0)
             {
@@ -166,8 +166,24 @@ namespace TextRPG.Systems
                 // ToLower는 입력받은 글자를 전부다 소문자로 바꿔준다.
                 if(Console.ReadLine()?.ToLower() == "y")
                 {
-                    //Console.WriteLine($"{item.Name}을 버렸습니다.");
+                    // 장착 해제 로직
+                    if(item is Equipment equipment)
+                    {
+                        // 플레이어가 장착하고 있는 무기인지
+                        if(equipment == player.EquipedWeapon)
+                        {
+                            player.UnequipItem(EquipmentSlot.Weapon);
+                        }
+                        else if(equipment == player.EquipedArmor)
+                        {
+                            player.UnequipItem(EquipmentSlot.Armor);
+                        }
+                    }
+                   
                     RemoveItem(item);
+
+                    Console.WriteLine($"{item.Name}을 버렸습니다.");
+                    ConsoleUI.PressAnyKey();
                     
                 }
             }

@@ -119,10 +119,30 @@ namespace TextRPG.Models
         // 기본 공격 메소드(override)
         public override int Attack(Character target)
         {
-            // TODO:  장착 무기 또는 방어구에 따른 추가 데미지 계산
-            int attckDamage = AttackPower;
+            // 장착 무기 또는 방어구에 따른 추가 데미지 계산
+            int attackDamage = AttackPower;
 
-            return target.TakeDamage(attckDamage);
+            // null 병합 연산자 : ?? 
+            // a가 null이 아니면 a값 그대로 사용하고
+            // a가 null이면 ?? 뒤에 있는 값(100)을 사용한다.
+            // int b = a ?? 100;
+
+            /*
+                null 조건 연산자
+                EquipedWeapon?.AttackBonus
+                EquipedWeapon이 null이 아니면 AttackBonus 값에 접근하고
+                EquipedWeapon이 null이면 더이상 진행하지않고 전체 결과를 null로 반환한다.
+                null 병합 연산자
+                EquipedWeapon?.AttackBonus이 null이 아니면 EquipedWeapon?.AttackBonus값을 추가하겠다.
+                EquipedWeapon?.AttackBonus이 null이면 ??뒤에 있는 값(0)을 추가하겠다.
+            */
+            attackDamage += EquipedWeapon?.AttackBonus ?? 0;
+            //if (EquipedWeapon != null)
+            //{
+            //    attackDamage += EquipedWeapon.AttackBonus;
+            //}
+
+            return target.TakeDamage(attackDamage);
         }
         // 스킬 공격 (MP 소모) : Player 전용 메소드
         public int SkillAttack(Character target)
@@ -131,6 +151,7 @@ namespace TextRPG.Models
 
             // 스킬 공격 = 기본공격 1.5데미지
             int totalDamage = AttackPower;
+            totalDamage += EquipedWeapon?.AttackBonus ?? 0;
             totalDamage = (int)(totalDamage * 1.5f);
 
             // MP소모
