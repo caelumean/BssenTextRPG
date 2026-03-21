@@ -40,6 +40,8 @@ namespace TextRPG.Data
     }
     public class ItemData
     {
-
+        public string ItemType { get; set; }
+        public string Name { get; set; }
+        public string? Slot { get; set; }
     }
 }
